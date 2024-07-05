@@ -29,11 +29,47 @@
 // } catch (err) {
 //   console.error(err);
 // }
-//
-const properCase = require("proper-upper-case");
+//-------------------------------------------------------------------------------------------------------------------------------------
+// const properCase = require("proper-upper-case");
 
-const convert = (text) => {
-  return properCase(text);
-};
-console.log(convert("sumip chaudhary"));
+// const convert = (text) => {
+//   return properCase(text);
+// };
+// const slugify = require("slugify");
+// const slug = (text) => {
+//   return slugify(text);
+// };
+// const lodash = require("lodash");
+// const bcrypt = require("bcryptjs");
+// const trunc = (text) => {
+//   res = lodash.truncate(text);
+//   return res;
+// };
+// console.log(convert("sumip chaudhary"));
+// console.log(slug("sumip chaudhary"));
+// console.log(trunc("GeeksforGeeks is a computer science portal."));
 //slugify lodash bcryptjs passwordverify nodemailer
+// const password = "myPassword123";
+// const bcrypt = require("bcrypt");
+// bcrypt.genSalt(10, (err, salt) => {
+//   bcrypt.hash(password, salt, (err, hash) => {
+//     if (err) {
+//       console.error(err);
+//       return;
+//     }
+//     console.log("Hashed password:", hash);
+
+//     bcrypt.compare(password, hash, (err, isMatch) => {
+//       if (err) {
+//         console.error(err);
+//         return;
+//       }
+//       console.log("Password match:", isMatch);
+//     });
+//   });
+// });
+import bcryptjs from "bcryptjs";
+const encryptPw = (text) => bcryptjs.hashSync(text);
+
+const hashPw = encryptPw("password");
+console.log(hashPw);
