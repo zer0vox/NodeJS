@@ -1,0 +1,88 @@
+const QRCode = require('qrcode');
+const fs = require('fs');
+
+// Specify the URL you want to encode
+const url = 'https://example.com';
+
+// Generate the QR code and save it as a PNG file
+QRCode.toFile('qrcode.png', url, {
+  color: {
+    dark: '#000000',  // Black dots
+    light: '#ffffff'  // White background
+  }
+}, function (err) {
+  if (err) throw err;
+  console.log('QR code has been saved as qrcode.png');
+});
+// Read the image file
+Jimp.read('image.png', (err, image) => {
+    if (err) throw err;
+
+    // Resize the image to a smaller size if needed
+    image.resize(250, 250);
+
+    // Convert the image to a base64 string
+    const base64 = image.getBase64Async(Jimp.MIME_PNG);
+
+    // Generate the QR code using the base64 string
+    QRCode.toFile('qrcode.png', base64, {
+        color: {
+            dark: '#000000',  // Black dots
+            light: '#ffffff'  // White background
+        }
+    }, function (err) {
+        if (err) throw err;
+        console.log('QR code has been saved as qrcode.png');
+    });
+});
+//2
+const CurrencyConverter = require('currency-converter-lt');
+
+// Function to convert currency
+async function convertCurrency(amount, fromCurrency, toCurrency) {
+  const currencyConverter = new CurrencyConverter();
+
+  try {
+    const result = await currencyConverter.from(fromCurrency).to(toCurrency).amount(amount).convert();
+    console.log(`${amount} ${fromCurrency} is equal to ${result} ${toCurrency}`);
+  } catch (error) {
+    console.error('Error converting currency:', error);
+  }
+}
+
+// Example usage
+const amount = 100; // amount to convert
+const fromCurrency = 'USD'; // source currency
+const toCurrency = 'EUR'; // target currency
+
+convertCurrency(amount, fromCurrency, toCurrency);
+//3
+const PDFDocument = require("pdfkit");
+const fs = require("fs");
+const generate = (a, b) => {
+  const doc = new PDFDocument();
+  doc.pipe(fs.createWriteStream("output.pdf"));
+  doc.font("font/BaskervvilleSC-Regular.ttf").fontSize(25).text(a, 100, 100);
+  doc.image(b, {
+    fit: [250, 300],
+    align: "center",
+    valign: "center",
+  });
+  doc.end();
+};
+let a = "Scan the QR code for payment";
+let b = "./qrcode.png";
+generate(a, b);
+//4
+const axios = require("axios");
+async function getUser() {
+  try {
+    const response = await axios.get(
+      "https://api.open-meteo.com/v1/forecast?latitude=27.70&longitude=85.32&hourly=temperature_2m&daily=sunrise,sunset&forecast_days=1&timezone=auto"
+    );
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+}
+getUser();
